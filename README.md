@@ -21,8 +21,6 @@ We are using the `ECommerceDB` database from the previous task, which includes t
 
 ## 🔍 Sample code
 
-Shows all products with stock less than 10. Useful for warehouse or inventory management teams.
-
 CREATE VIEW LowStockProducts AS
 SELECT
     ProductID,
@@ -33,3 +31,20 @@ FROM
     Product
 WHERE
     Stock < 10;
+
+CREATE VIEW CustomerOrderSummary AS
+SELECT
+    o.OrderID,
+    c.Name AS CustomerName,
+    c.Email,
+    o.OrderDate,
+    o.TotalAmount
+FROM
+    Orders o
+JOIN Customer c ON o.CustomerID = c.CustomerID;
+
+CREATE VIEW HighValueOrders AS
+SELECT *
+FROM Orders
+WHERE TotalAmount > 1000
+WITH CHECK OPTION;
